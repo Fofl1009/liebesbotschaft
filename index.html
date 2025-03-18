@@ -29,11 +29,45 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
+        #countdown {
+            font-size: 2em;
+            margin-top: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>Für dich, meine Liebe Christina ❤️</h1>
     <p>Seit sechs Monaten machst du mein Leben schöner, heller und liebevoller. Jeder Moment mit dir ist ein Geschenk, und ich bin unendlich dankbar, dich an meiner Seite zu haben. Du bist mein Glück, mein Zuhause und mein Herz. Ich hab mein ganzes Leben lang auf jemanden wie dich gewartet. Also denk nicht mal eine Sekunde, dass ich auf dich verzichten könnte – nicht heute, nicht morgen, nicht für den Rest unseres Lebens. Ich liebe dich! 💕</p>
     <div class="heart">❤️</div>
+    <div id="countdown"></div>
+    
+    <script>
+        function startCountdown(days) {
+            let targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + days);
+            
+            function updateCountdown() {
+                let now = new Date().getTime();
+                let distance = targetDate - now;
+                
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById("countdown").innerHTML = `Noch ${days} Tage, ${hours} Stunden, ${minutes} Minuten, ${seconds} Sekunden`;
+                
+                if (distance < 0) {
+                    document.getElementById("countdown").innerHTML = "Der Moment ist da! ❤️";
+                }
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        startCountdown(78);
+    </script>
 </body>
 </html>
